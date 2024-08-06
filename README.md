@@ -1,11 +1,51 @@
-# NPM Package Starter
+<img src="https://github.com/user-attachments/assets/cf92e206-0cee-4f38-abfd-959c27ac3232"
+height="100px"
+/>
 
-# Clone the repo
+A lightweight Node.js based file server for modern apps
+
+
+## Install
 ```
-git clone https://github.com/fathah/npm-package-starter.git
+npm install nextdrive
 ```
 
-# Install Typescript
+## Usage
+```ts
+import NextDriveServer from 'nextdrive';
+
+const server = new NextDriveServer({
+    port:3000,
+    apiKey: process.ev.API_KEY,
+    folder: 'drive' //[optional] default to {working dir}/uploads
+});
+
 ```
-npm i -D typescript tsup
+
+
+
+
+## API Endpoints
+
+### 1. `/upload/{foldername}`
+To upload files to the drive.
+Just send as Formdata. Rest will be handled and returns the file name to store in your db.
+```ts
+const formData = new FormData();
+formData.append('files', file);
+
+
+fetch('http://localhost:3000/upload/{foldername}', 
+{
+    method: 'POST',
+    body : formData,
+    {
+        headers : {
+            'X-API-KEY' : 'API_KEY_ADDED_IN_CONFIGS'
+        }
+    }
+});
+
 ```
+
+
