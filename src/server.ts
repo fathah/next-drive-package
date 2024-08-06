@@ -62,14 +62,13 @@ export default function startServer(foldername:string, apikey:string, port:numbe
   
           const newFiles = Array.isArray(fileArray) ? fileArray : [fileArray];
           const updatedFiles = newFiles.map(file => {
-            const ext = path.extname(file.originalFilename as string);
-            const newFilePath = path.join(uploadPath, `${file.newFilename}${ext}`);
+            const newFilePath = path.join(uploadPath, file.newFilename);
             fs.renameSync(file.filepath, newFilePath);
             return {
               ...file,
               filepath: newFilePath,
               originalFilename: file.originalFilename,
-              newFilename: `${file.newFilename}${ext}`,
+              newFilename: file.newFilename,
             };
           });
   
@@ -88,17 +87,11 @@ export default function startServer(foldername:string, apikey:string, port:numbe
     });
   
     app.listen(port, () => {
-        console.log("\x1b[32m ⚡Starting Next Drive \x1b[0m")
-        console.log(`\x1b[42m 📦 Next Drive Running on PORT: ${port} \x1b[0m`)
+        console.log("\x1b[32m ⚡ Starting Next Drive \x1b[0m");
+        console.log(' ');
+        console.log(`\x1b[42m 📦 Next Drive Running on PORT: ${port} \x1b[0m`);
     });
   };
-  
-
-
-
-
-
-
 
 
 

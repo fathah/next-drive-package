@@ -31,7 +31,7 @@ const server = new NextDriveServer({
 
 ## API Endpoints
 
-### 1. `/upload/{foldername}`
+### `/upload/{foldername}`
 To upload files to the drive.
 Just send as Formdata. Rest will be handled and returns the file name to store in your db.
 ```ts
@@ -50,6 +50,12 @@ fetch('http://localhost:3000/upload/{foldername}',
     }
 });
 
+// OUTPUTS: File name & details
 ```
 
+
+File access: 
+```
+http://{root_url}/uploads/{foldername}/{filename}
+```
 
