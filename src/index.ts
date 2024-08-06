@@ -2,9 +2,10 @@ import startServer from "./server";
 
 export default class NextDriveServer{
 
-    public PORT:number;
-    public API_KEY:string;
-    public FOLDER?:string = '';
+    public port:number;
+    public apiKey:string;
+    public folder?:string = '';
+    public options?:{cors?:boolean} = {}
     
 
 /**
@@ -13,17 +14,20 @@ export default class NextDriveServer{
  * @param {number} config.port - The port number for the server.
  * @param {string} config.apiKey - The API key for the server.
  * @param {string} [config.folder] - The folder name for the server (optional).
+ * @returns {void}
  */
     constructor(config:{
         port: number;
         apiKey: string;
         folder?:string;
+        options?:{cors?:boolean}
     }){
-        this.PORT = config.port;
-        this.API_KEY = config.apiKey;
-        if(config.folder) this.FOLDER = config.folder
+        this.port = config.port;
+        this.apiKey = config.apiKey;
+        if(config.folder) this.folder = config.folder
+        if(config.options) this.options = config.options
     }
     public async start(){
-        startServer(this.FOLDER!, this.API_KEY, this.PORT);
+        startServer(this.folder!, this.apiKey, this.port, this.options?.cors??false);
     }
 }

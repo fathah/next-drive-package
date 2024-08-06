@@ -7,15 +7,15 @@
   "types": "./dist/index.d.ts",
   "homepage": "ziqx.cc",
   "repository": {
-    "url": "https://github.com/fathah/npm-package-starter"
+    "url": "https://github.com/fathah/next-drive-package"
   },
   "scripts": {
     "build": "tsup"
   },
   "keywords": [
-    "ziqx",
-    "ziqx auth",
-    "ziqx.js"
+    "next drive",
+    "file server",
+    "s3"
   ],
   "author": "Ziqx",
   "license": "ISC",

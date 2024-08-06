@@ -7,9 +7,13 @@ import cors from 'cors';
 
 
 
-export default function startServer(foldername:string, apikey:string, port:number) {
+export default function startServer(foldername:string, apikey:string, port:number,allowCors: boolean) {
     const app = express();
-    app.use(cors());
+
+    
+    if (allowCors) {
+        app.use(cors());
+      }
   
     const rootPath = path.join(process.cwd(), foldername, 'uploads');
   
