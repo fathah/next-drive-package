@@ -1,0 +1,36 @@
+{
+  "name": "nextdrive",
+  "version": "0.0.1",
+  "description": "",
+  "main": "./dist/index.ts",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "homepage": "ziqx.cc",
+  "repository": {
+    "url": "https://github.com/fathah/npm-package-starter"
+  },
+  "scripts": {
+    "build": "tsup"
+  },
+  "keywords": [
+    "ziqx",
+    "ziqx auth",
+    "ziqx.js"
+  ],
+  "author": "Ziqx",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/formidable": "^3.4.5",
+    "@types/node": "^22.1.0",
+    "tsup": "^8.0.2",
+    "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "formidable": "^3.5.1",
+    "path": "^0.12.7"
+  }
+}
