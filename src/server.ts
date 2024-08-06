@@ -88,7 +88,8 @@ export default function startServer(foldername:string, apikey:string, port:numbe
     });
   
     app.listen(port, () => {
-        console.log(`\x1b[43m 📦 Next Drive Running on PORT: ${port} \x1b[0m`)
+        console.log("\x1b[32m ⚡Starting Next Drive \x1b[0m")
+        console.log(`\x1b[42m 📦 Next Drive Running on PORT: ${port} \x1b[0m`)
     });
   };
   

@@ -2,10 +2,10 @@ import startServer from "./server";
 
 export default class NextDriveServer{
 
-    public port:number;
-    public apiKey:string;
-    public folder?:string = '';
-    public options?:{cors?:boolean} = {}
+    private port:number;
+    private apiKey:string;
+    private folder?:string = '';
+    private options?:{cors?:boolean} = {}
     
 
 /**
