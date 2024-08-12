@@ -19,6 +19,8 @@ const server = new NextDriveServer({
     apiKey: process.ev.API_KEY,
 });
 
+server.start();
+
 ```
 ### Optional Parameters
 
