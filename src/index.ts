@@ -5,7 +5,7 @@ export default class NextDriveServer{
     private port:number;
     private apiKey:string;
     private folder?:string = '';
-    private options?:{cors?:boolean} = {}
+    private options?:{cors?:boolean,allowedDomains?:string[]} = {}
     
 
 /**
@@ -20,7 +20,7 @@ export default class NextDriveServer{
         port: number;
         apiKey: string;
         folder?:string;
-        options?:{cors?:boolean}
+        options?:{cors?:boolean, allowedDomains?:string[]};
     }){
         this.port = config.port;
         this.apiKey = config.apiKey;
@@ -28,6 +28,6 @@ export default class NextDriveServer{
         if(config.options) this.options = config.options
     }
     public async start(){
-        startServer(this.folder!, this.apiKey, this.port, this.options?.cors??false);
+        startServer(this.folder!, this.apiKey, this.port, this.options?.cors??false, this.options?.allowedDomains);
     }
 }

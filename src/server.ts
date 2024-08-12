@@ -3,16 +3,34 @@ import express, { Request, Response } from 'express';
 import fs from 'fs';
 import path from 'path';
 import { IncomingForm, File } from 'formidable';
-import cors from 'cors';
+import cors, { CorsOptions } from 'cors';
 
 
 
-export default function startServer(foldername:string, apikey:string, port:number,allowCors: boolean) {
+export default function startServer(foldername:string, apikey:string, port:number,allowCors: boolean, allowFor?:string[]) {
     const app = express();
 
     
     if (allowCors) {
-        app.use(cors());
+      let corsOptions:CorsOptions  = {
+        origin: true,
+        optionsSuccessStatus: 200
+      };
+
+      if(allowFor && allowFor.length>0){
+         corsOptions = {
+          origin: function (origin:any, callback:any) {
+            if (!origin || allowFor.indexOf(origin) !== -1) {
+              callback(null, true);
+            } else {
+              callback(new Error('Not allowed by CORS'));
+            }
+          },
+          optionsSuccessStatus: 200
+        };
+      }
+  
+        app.use(cors(corsOptions));
       }
   
     const rootPath = path.join(process.cwd(), foldername, 'uploads');

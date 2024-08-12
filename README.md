@@ -16,7 +16,7 @@ import NextDriveServer from 'nextdrive';
 
 const server = new NextDriveServer({
     port:3000,
-    apiKey: process.ev.API_KEY,
+    apiKey: process.env.API_KEY,
 });
 
 server.start();
@@ -27,6 +27,8 @@ server.start();
 `folder`:  default to '*{working dir}/uploads*'
 
 `options.cors`: Allow CORS
+
+`options.allowedDomains`: Allow CORS only for certain domains
 
 
 
