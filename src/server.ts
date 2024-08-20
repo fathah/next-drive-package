@@ -103,6 +103,61 @@ export default function startServer(foldername:string, apikey:string, port:numbe
         return res.status(500).json({ success: false, error });
       }
     });
+
+    app.delete('/:folder', (req: Request, res: Response) => {
+      const folder = req.params.folder;
+
+      const api = req.headers['x-api-key'] as string;
+  
+      if (api !== apikey) {
+        return res.status(400).json({ success: false, error: 'Unauthorized Access' });
+      }
+      if (!folder) {
+        return res.status(400).json({ success: false, error: 'Please provide a folder name' });
+      }
+  
+      const uploadPath = path.join(rootPath, folder);
+  
+      if (!fs.existsSync(uploadPath)) {
+        return res.status(404).json({ success: false, error: 'Folder not found' });
+      }
+
+      const filesnames = req.body.files;
+
+      if (!filesnames || filesnames.length === 0) {
+        return res.status(400).json({ success: false, error: 'Please provide file names' });
+      }
+  
+      if (!Array.isArray(filesnames)) {
+        return res.status(400).json({ success: false, error: 'File names must be an array' });
+      }
+  
+      if (filesnames.length === 0) {
+        return res.status(400).json({ success: false, error: 'Please provide at least one file name' });
+      }
+   try {
+    let failed:string[] = [];
+
+    for (const filename of filesnames) {
+      const filePath = path.join(uploadPath, filename);
+
+      if (!fs.existsSync(filePath)) {
+        failed.push(filename);
+        continue;
+      }else{
+        fs.unlinkSync(filePath);
+      }
+    }
+
+    return res.status(200).json({ success: true, deleted: filesnames, failed });
+
+   } catch (error) {
+    return res.status(500).json({ success: false, error:`${error}` });
+   }
+  
+     
+    });
+  
   
     app.listen(port, () => {
         console.log("\x1b[32m ⚡ Starting Next Drive \x1b[0m");

@@ -35,7 +35,7 @@ server.start();
 
 ## API Endpoints
 
-### `/upload/{foldername}`
+### [POST] `/upload/{foldername}`
 To upload files to the drive.
 Just send as Formdata. Rest will be handled and returns the file name to store in your db.
 ```ts
@@ -63,3 +63,23 @@ File access:
 http://{root_url}/uploads/{foldername}/{filename}
 ```
 
+### [DELETE] `/{foldername}`
+To delete files from the drive.
+Send file names as an Array
+```ts
+const formData = new FormData();
+formData.append('files', [filenames]);
+
+
+fetch('http://localhost:3000/{foldername}', 
+{
+    method: 'DELETE',
+    body : formData,
+    {
+        headers : {
+            'X-API-KEY' : 'API_KEY_ADDED_IN_CONFIGS'
+        }
+    }
+});
+
+```
